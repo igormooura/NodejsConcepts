@@ -15,6 +15,7 @@ const handleNewUser =  async (req, res) => {
     
     if(duplicate) return res.sendStatus(409);
 
+    
     try{ 
         const hashedPwd = await bcrypt.hash(pwd, 10); // o que vai ser criptografado, quantas vezes 
         
