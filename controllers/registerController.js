@@ -29,6 +29,19 @@ const handleNewUser =  async (req, res) => {
     }
 }
 
+const getAllUsers = async (req, res) => {
+    try {
+        const users = usersDB.users;
+        res.status(200).json(users);
+    } catch (error) {
+        // Captura e trata erros
+        console.error('Error fetching users:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
 module.exports = {
-    handleNewUser
+    handleNewUser,
+    getAllUsers
 };
