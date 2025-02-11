@@ -22,6 +22,11 @@ const handleNewUser =  async (req, res) => {
         const newUser = {"username": user, "password": hashedPwd}
         usersDB.setUsers([...usersDB.users, newUser]);
         
+        await fsPromises.writeFile(
+            path.join(__dirname, '..', 'model', 'users.json'),
+            JSON.stringify(usersDB.users)
+        );
+
         console.log(usersDB.users);
         res.status(201).json({'sucess': 'new user created'})
         }catch (err){
@@ -34,7 +39,6 @@ const getAllUsers = async (req, res) => {
         const users = usersDB.users;
         res.status(200).json(users);
     } catch (error) {
-        // Captura e trata erros
         console.error('Error fetching users:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
