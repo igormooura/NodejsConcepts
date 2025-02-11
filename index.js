@@ -2,12 +2,14 @@ const express = require('express');
 const app = express();
 const homeRoutes = require('./routes/HomeRoutes');
 const contactRoutes = require('./routes/ContactRoutes');
+const registerRoutes = require('./routes/registerRoutes');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", homeRoutes);
 app.use("/contact", contactRoutes);
+app.use("/register", registerRoutes);
 
 app.use((req, res) => {
     res.status(404).send("not found");
